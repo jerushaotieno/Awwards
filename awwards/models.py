@@ -16,7 +16,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to='images/')
     description = models.TextField(blank=True)
     live_link = models.URLField()
-    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def save_project(self):
