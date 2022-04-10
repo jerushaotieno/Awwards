@@ -3,6 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+import datetime as dt
+
+from awwards.views import projects_of_day
 
 
 # Create your models here.
@@ -29,7 +32,7 @@ class Project(models.Model):
 
     def delete_project(self):
         '''
-        method deletes posted projectost instance 
+        method deletes posted project instance 
         '''
         self.delete()
 
@@ -39,6 +42,26 @@ class Project(models.Model):
         searches posted projects by title 
         '''
         return cls.objects.filter(title__icontains=search_term).all()
+
+
+    @classmethod
+    def todays_projects(cls):
+        today = dt.date.today()
+        news = cls.objects.filter(pub_date__date = today)
+        return projects_of_day
+
+
+    def test_get_projects_by_date(self):
+        test_date = '2022-04-10'
+        date = dt.datetime.strptime(test_date, '%Y-%m-%d').date()
+        projects_by_date = Project.days_projects(date)
+        self.assertTrue(len(projects_by_date) == 0)
+
+
+    @classmethod
+    def days_projects(cls,date):
+        projects = cls.objects.filter(posted_on = date)
+        return projects
 
 
 # Profile view

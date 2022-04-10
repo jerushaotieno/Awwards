@@ -34,19 +34,22 @@ class UserProfileTest(TestCase):
 
 class TestProject(TestCase):
     ''' 
-    test class for the project image model 
+    test class for the project model 
     '''
     
+class ProjectTestClass(TestCase):
+
     def setUp(self):
         ''' 
         method called before each test case
         '''
-        self.test_user = User(username='Linet', password='code')
+        self.test_user = UserProfile(user='Linet', photo='/images', bio='sample bio')
         self.test_user.save()
-        self.test_profile = self.test_user.profile
-        self.test_profile.save()
 
-        self.test_post = Project(image='images/', title='sample text',description='sample description', profile=self.test_profile, live_link='https://www.google.com', posted_on=datetime.now())
+        self.test_user_profile = self.test_user.user_profile
+        self.test_user_profile.save()
+
+        self.test_post = Project(title='sample text', image='images/', description='sample description', live_link='https://www.google.com', user_profile=self.test_user_profile, posted_on=datetime.now())
 
     def test_instance(self):
         ''' 
@@ -60,6 +63,7 @@ class TestProject(TestCase):
         '''
         self.test_project.save_project()
         self.assertEqual(len(Project.objects.all()), 1)
+
         self.test_project.delete_project()
         self.assertEqual(len(Project.objects.all()), 0)
 
@@ -77,6 +81,14 @@ class TestProject(TestCase):
         '''
         self.test_user.delete()
         Project.objects.all().delete()
+
+
+# testing today's projects
+
+def test_get_projects_today(self):
+        today_projects = Project.todays_projects()
+        self.assertTrue(len(today_projects)>0)
+
 
 
 class TestRating(TestCase):
