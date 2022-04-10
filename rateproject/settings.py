@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,6 +26,9 @@ SECRET_KEY = 'django-insecure-z*pi^s#&c%m8_%uli#lsn4y69&$3n272+xwulj*0(l^bws$e8u
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = config('DEBUG', default=False, cast=bool)
+
+
 
 ALLOWED_HOSTS = []
 
@@ -78,13 +82,16 @@ WSGI_APPLICATION = 'rateproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'awwards',
         'USER': 'moringa',
     'PASSWORD':'Access',
+    'HOST': '127.0.0.1',
+    'PORT': ''
     }
 }
 
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

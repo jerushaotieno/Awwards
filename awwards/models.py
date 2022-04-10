@@ -17,11 +17,10 @@ class Project(models.Model):
     image = models.ImageField(upload_to='images/')
     description = models.TextField(blank=True)
     live_link = models.URLField()
-    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True)
 
     
-
     def save_project(self):
         ''' 
         method saves posted project instance 
@@ -106,3 +105,5 @@ class UserRating(models.Model):
         method deletes a user's project rating 
         '''
         self.delete()
+
+
