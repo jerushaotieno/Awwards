@@ -1,3 +1,4 @@
+import profile
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -18,6 +19,8 @@ class Project(models.Model):
     live_link = models.URLField()
     profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True)
+
+    
 
     def save_project(self):
         ''' 
@@ -45,7 +48,7 @@ class UserProfile(models.Model):
     ''' 
     extends the user model 
     '''
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     photo = models.ImageField(default='default.jpg', upload_to='avatars/')
     bio = models.TextField(max_length=500, blank=True, default=f'Hi, thanks for checking out my profile')
 
