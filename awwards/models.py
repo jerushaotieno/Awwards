@@ -5,8 +5,6 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 import datetime as dt
 
-from awwards.views import projects_of_day
-
 
 # Create your models here.
 
@@ -45,9 +43,9 @@ class Project(models.Model):
 
 
     @classmethod
-    def todays_projects(cls):
-        today = dt.date.today()
-        news = cls.objects.filter(pub_date__date = today)
+    def projects_of_day(cls):
+        date = dt.date.today()
+        projects_of_day = cls.objects.filter(posted_on = date)
         return projects_of_day
 
 

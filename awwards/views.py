@@ -1,6 +1,7 @@
-from django.http  import HttpResponse,Http404
+from django.http  import HttpResponse,Http404, request
 from django.shortcuts import render, redirect
 import datetime as dt
+from .models import Project
 
 # Create your views here.
 
@@ -11,15 +12,15 @@ def welcome(request):
 
 # View Function to present projects from today
 
-def projects_of_day(request):
+def projects_today(request):
     date = dt.date.today()
-    return render(request, 'today-projects.html', {"date": date,})
+    awwards = Project.projects_of_day()
+    return render(request, 'all-projects/today-projects.html', {"date": date,"awwards":awwards})
 
 
 # View Function to present projects from past days
 
 def past_days_projects(request, past_date):
-
     try:
         # Converts data from the string Url
         date = dt.datetime.strptime(past_date, '%Y-%m-%d').date()
@@ -30,6 +31,7 @@ def past_days_projects(request, past_date):
         assert False
 
     if date == dt.date.today():
-        return redirect(projects_of_day)
+        return redirect(projects_today)
 
-    return render(request, 'past-projects.html', {"date": date})
+    awwards = Project.days_projects(dt.date)
+    return render(request, 'all-projects/past-projects.html',{"date": dt.date,"awwards":awwards})
