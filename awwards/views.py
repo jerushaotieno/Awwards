@@ -1,7 +1,8 @@
 from django.http  import HttpResponse,Http404, request
 from django.shortcuts import render, redirect
 import datetime as dt
-from .models import Project
+from .models import Project, UserProfile, UserRating
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -51,3 +52,13 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-projects/search.html',{"message":message})
+
+
+# Individual Project View
+
+def project(request,project_id):
+    try:
+        project = Project.objects.get(id = project_id)
+    except Project.DoesNotExist:
+        raise Http404()
+    return render(request,"all-projects/project.html", {"project":project})
