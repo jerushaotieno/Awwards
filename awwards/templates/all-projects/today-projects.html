@@ -5,17 +5,17 @@
 <div class="container">
 
     <!-- Looping through projects   -->
-    {% for projects_item in projects %}
+    {% for projects_item in awwards %}
 
     <div class="row">
         <!-- displaying Projects Items -->
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <h2 class="text-center"> {{ projects_item.title }} </h2>
+            <img src="{{projects_item.image.url}}" class="img-responsive" alt="Image">
             </div>
         
             <!--Display projects item images  -->
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <img src="{{projects_item.project_image.url}}" class="img-responsive" alt="Image">
             </div>
         
         </div>

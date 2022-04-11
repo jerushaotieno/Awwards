@@ -15,7 +15,7 @@ def welcome(request):
 
 def projects_today(request):
     date = dt.date.today()
-    awwards = Project.projects_of_day()
+    awwards = Project.objects.all()
     return render(request, 'all-projects/today-projects.html', {"date": date,"awwards":awwards})
 
 
