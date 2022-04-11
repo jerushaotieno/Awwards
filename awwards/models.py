@@ -34,12 +34,14 @@ class Project(models.Model):
         '''
         self.delete()
 
+
     @classmethod
-    def search_project(cls, search_term):
+    def search_by_title(cls,search_term):
         ''' 
         searches posted projects by title 
         '''
-        return cls.objects.filter(title__icontains=search_term).all()
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
 
 
     @classmethod

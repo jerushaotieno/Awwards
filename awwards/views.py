@@ -35,3 +35,19 @@ def past_days_projects(request, past_date):
 
     awwards = Project.days_projects(dt.date)
     return render(request, 'all-projects/past-projects.html',{"date": dt.date,"awwards":awwards})
+
+
+# Search View
+
+def search_results(request):
+
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_projects = Project.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'all-projects/search.html',{"message":message,"projects": searched_projects})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-projects/search.html',{"message":message})
