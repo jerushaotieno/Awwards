@@ -1,1 +1,6 @@
-{%extends "django_registration/base.html"%} {% load bootstrap5 %}
+{%extends 'all-projects/base.html'%}
+
+{% block content %}
+<h1>Account Created Successfully.<a class="navbar-brand" href="{% url 'projectsToday' %}"> Click here to proceed </a>
+</h1>
+{%endblock%}
