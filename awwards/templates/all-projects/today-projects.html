@@ -5,29 +5,31 @@
 <div class="container">
 
     <!-- Looping through projects   -->
-    {% for projects_item in awwards %}
-
+    
     <div class="row">
-        <!-- displaying Projects Items -->
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <!-- <h2 class="text-center"> {{ projects_item.title }} </h2> -->
-            <img src="{{projects_item.image.url}}" class="img-responsive" alt="Image">
-            </div>  
-    </div>
+        {% for projects_item in awwards %}
 
-    <div class="row">
-        <!-- displaying Project -->
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <h2 class="text-center"> {{ projects_item.title }} </h2>
+        <div class="col" style="float: left; width: 30%;">
+            <div class="card" style="width: 20rem; margin-bottom: 30px; margin-top: 15px;">
+                <img src="{{projects_item.image.url}}" class="card-img-top img-responsive" alt="Image">
+                <div class="card-body" style="text-align: center;">
+                    <h4 class="card-title font-weight-bold">{{ projects_item.title }}</h4>
+                    <p class="card-text" style="font-size: medium;">{{ projects_item.description }}</p>
+                    <p class="card-text" style="font-style:italic; font-size: small;"> Posted by {{ projects_item.user_profile }} on </p> <span>
+                    <p class="card-text" style="font-style:italic; font-size: small;">{{ projects_item.posted_on }}</p> </span>
+                    <a href="{{ projects_item.live_link }}" class="btn btn-link" style="font-style:italic;"> Visit Site</a>
+                </div>
+            </div>
         </div>
 
-    </div>
 
     {% empty %}
     <div class="row">
         <h2 class="text-center">There are NO Project Items</h2>
     </div>
     {% endfor %}
+    </div>    
+
 
 </div>
 
