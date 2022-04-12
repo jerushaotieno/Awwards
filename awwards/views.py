@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 import datetime as dt
 from .models import Project, UserProfile, UserRating
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -40,7 +42,7 @@ def past_days_projects(request, past_date):
 
 # Search View
 
-def search_results(request):
+def search(request):
 
     if 'project' in request.GET and request.GET["project"]:
         search_term = request.GET.get("project")
@@ -62,3 +64,9 @@ def project(request,project_id):
     except Project.DoesNotExist:
         raise Http404()
     return render(request,"all-projects/project.html", {"project":project})
+
+
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    return render(request, 'profile.html') 

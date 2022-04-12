@@ -13,11 +13,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+
 from django.contrib import admin
+from django.conf.urls import url, include
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url('admin/', admin.site.urls),
     url(r'',include('awwards.urls')),
-    # url(r'^accounts/', include('django-registration.backends.simple.urls')),
 ]
+
+# from django.contrib import admin
+# from django.urls import path, include
+# from django.urls import path
+# from django.conf.urls import url, include
+
+# urlpatterns = [
+#     path(r'',include('awwards.urls')),
+#     url(r'^accounts/', include('django_registration.backends.one_step.urls')),
+#     url('accounts/', include('django.contrib.auth.urls')),
+# ]
+
+
+
+# urlpatterns = [
+#     url('', admin.site.urls),
+#     url(r'',include('awwards.urls')),
+#     path('',include('awwards.urls')),
+#     path('', include('django_registration.backends.one_step.urls')),
+#     path('', include('django.contrib.auth.urls')),
+# ]
