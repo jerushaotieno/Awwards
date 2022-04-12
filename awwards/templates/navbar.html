@@ -16,7 +16,7 @@
         <!-- Adding a search form  -->
         <div class="col-sm-4 col-md-4 navbar-right">
 
-            <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+            <form class="navbar-form" role="search" action="{% url 'search' %}">
 
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search Project" name="project">
@@ -31,24 +31,16 @@
 
         <div class="col-sm-6 col-md-6">
             {% if user.is_authenticated %}
-            <ul>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                            <span class="caret"></span>
-                        </a>
-                    <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href="{%url 'projectsToday'%}">Home</a>
-                    </li>
-                    <li>
-                        <a href="/accounts/password/change">Change Password</a>
-                    </li>
-                    <li>
-                        <a href="/logout">Logout</a>
-                    </li>
-                    </ul>
-                </li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="/">Home</a></li>
+                  <li><a class="dropdown-item" href="/accounts/password_reset">Change Password</a></li>
+                  <li><a class="dropdown-item" href="/accounts/logout">Log Out</a></li>
                 </ul>
+              </div>
                 {% else %}
                 <li>
                 <a class='btn btn-default' href="/accounts/login">Login</a>
